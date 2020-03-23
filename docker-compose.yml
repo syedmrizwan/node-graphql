@@ -1,37 +1,28 @@
 version: '3.1'
 
 volumes:
-  postgres_data: {}
+  mysql_data: {}
 
 services:
-  newsfeeder:
+  node-graphql:
     build: .
-    environment:
-      - DB_NAME=newsfeeder
-      - DB_USERNAME=root
-      - DB_PASSWORD=root
-      - DB_HOST=127.0.0.1
-      - DB_PORT=5432
-      - DB_POOL_SIZE=10
-      - BUILD_ENV=dev
-      - SERVER_PORT=8080
     depends_on:
-     - postgres_server
+     - mysql_server
     ports:
-     - 8080:8080
+     - 4000:4000
     network_mode: 'host'
 
 
-  postgres_server:
-    image: postgres:12
-    container_name: postgres-server
+  mysql_server:
+    image: mysql
+    container_name: mysql-server
     environment:
-      - "POSTGRES_USER=root"
-      - "POSTGRES_DB=newsfeeder"
-      - "POSTGRES_PASSWORD=root"
+      - "MYSQL_USER=root"
+      - "MYSQL_DATABASE=api_node_demo"
+      - "MYSQL_PASSWORD=root"
     volumes:
-     - postgres_data:/var/lib/postgresql/data
+     - mysql_data:/var/lib/mysqlql/data
     ports:
-      - 5432:5432
+      - 3306:3306
     network_mode: 'host'
 
