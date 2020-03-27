@@ -23,7 +23,8 @@ db.sequelize.sync().then(() => {
   db.author.bulkCreate(
     times(10, () => ({
       firstName: faker.name.firstName(),
-      lastName: faker.name.lastName()
+      lastName: faker.name.lastName(),
+      email: faker.internet.email()
     }))
   );
   // populate post table with dummy data

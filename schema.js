@@ -3,6 +3,7 @@ export default `
     id: ID!
     firstName: String!
     lastName: String!
+    email: String!
     posts: [Post!]!
   }
   type Post {

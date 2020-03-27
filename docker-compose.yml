@@ -20,6 +20,7 @@ services:
       - "MYSQL_USER=root"
       - "MYSQL_DATABASE=api_node_demo"
       - "MYSQL_PASSWORD=root"
+      - "MYSQL_ROOT_PASSWORD=root"
     volumes:
      - mysql_data:/var/lib/mysqlql/data
     ports:
