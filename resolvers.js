@@ -12,6 +12,12 @@ export default {
       author: (parent, { id }, { db }, info) => db.author.findByPk(id) 
     },
     Mutation: {
+      createAuthor: (parent, { firstName, lastName, email }, { db }, info) =>
+      db.author.create({
+        firstName: firstName,
+        lastName: lastName,
+        email: email
+      }),
       createPost: (parent, { title, content, authorId }, { db }, info) =>
         db.post.create({
           title: title,
