@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { formatYupError } from "./utils/formatYupErrors";
 
 const schema = yup.object().shape({
   firstName: yup
@@ -34,14 +35,14 @@ export default {
       try {
         await schema.validate(args, { abortEarly: false });
         const { firstName, lastName, email } = args;
-        return db.author.create({
+        const res = db.author.create({
           firstName: firstName,
           lastName: lastName,
           email: email
         });
       } catch (err) {
         console.log(err);
-        return err;
+        return formatYupError(err);
       }
     },
     createPost: (parent, { title, content, authorId }, { db }, info) =>
