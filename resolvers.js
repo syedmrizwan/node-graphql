@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { formatYupError } from "./utils/formatYupErrors";
+import { generateResponse, formatYupError } from "./utils/utils";
 
 const schema = yup.object().shape({
   firstName: yup
@@ -40,9 +40,11 @@ export default {
           lastName: lastName,
           email: email
         });
+        if (res){
+          return generateResponse(200, true, `Author created successfully`);
+        }
       } catch (err) {
-        console.log(err);
-        return formatYupError(err);
+        return generateResponse(422, false, formatYupError(err));
       }
     },
     createPost: (parent, { title, content, authorId }, { db }, info) =>

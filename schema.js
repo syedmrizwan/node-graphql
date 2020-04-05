@@ -13,6 +13,11 @@ export default `
     authorId: ID!
     author: Author!
   }
+  type Response {
+    code: Int!
+    success: Boolean!
+    message: String
+}
   type Error {
     path: String!
     message: String!
@@ -24,7 +29,7 @@ export default `
     authors: [Author!]!
   }
   type Mutation {
-    createAuthor(firstName: String, lastName: String, email: String): [Error!]
+    createAuthor(firstName: String, lastName: String, email: String): Response
     createPost(title: String, content:String!, authorId: ID!): Post!
     updatePost(id: ID!, title: String, content:String!): [Int!]!
     deletePost(id: ID!): Int!
