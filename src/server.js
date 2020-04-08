@@ -3,13 +3,11 @@ import { ApolloServer, gql } from "apollo-server-express";
 import faker from "faker";
 import times from "lodash.times";
 import random from "lodash.random";
-import typeDefs from "./schema";
-import resolvers from "./resolvers";
+const schema = require('./graphql')
 import db from "./models";
 
 const server = new ApolloServer({
-  typeDefs: gql(typeDefs),
-  resolvers,
+  schema,
   context: { db }
 });
 
